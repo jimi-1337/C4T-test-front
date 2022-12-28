@@ -8,6 +8,7 @@ import Row from '../components/Row'
 import { useAuth } from '../contexts/GlobalMovies';
 import { Categories, category, modalState, movieList, movieState, selectedCat } from '../atoms/modalAtom.'
 import { RotatingLines } from 'react-loader-spinner';
+import { Movie } from '../contexts/movie';
 
 const Home = () => {
   const { movies, setMovies } = useAuth();
@@ -35,10 +36,10 @@ const Home = () => {
 
       {
         if (selectedcat.length == 0) {
-          let obj = {}
+          let obj : any = {}
           for (const k of movies) {
             if (k.category in obj)
-              obj[k.category].push(k);
+              obj[k.category as keyof typeof obj].push(k);
             else
             {
               obj[k.category] = [];
@@ -48,11 +49,11 @@ const Home = () => {
           setCategories(obj);
         }
         else {
-          let obj = {}
+          let obj : any = {}
           for (const k of movies) {
             if (selectedcat.includes(k.category)) {
               if (k.category in obj)
-                obj[k.category].push(k);
+                obj[k.category as keyof typeof obj].push(k);
               else
               {
                 obj[k.category] = [];
@@ -97,7 +98,7 @@ const Home = () => {
         <Banner netflixOriginals={movies} />
 
         <section className="md:space-y-24">
-          {list?.length > 0 && <Row title="My List" movies={list} />}
+          {list && list.length > 0 && <Row title="My List" movies={list} />}
           {
             categories 
             

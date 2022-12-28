@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/GlobalMovies";
 
 const Search = () => {
     const { handleSubmit, register } = useForm({mode: 'onChange'});
-    const refOne = useRef(null);
+    const refOne = useRef<HTMLFormElement>(null);
     const refTwo = useRef(null);
     const [selectedItemList, setSelectedItemList] = useState<String[]>();
     // const [selectedItemList, setSelectedItemList] = useState<String[]>();
